@@ -44,6 +44,7 @@ Projectの現在地、日次記録、判断履歴、次回タスクはengineerin
 | 5 | docs/implementation-guide-v0.1.md | Phase 1〜7のコマンド・作成ファイル・テスト・完了Gate |
 | 6 | docs/runbook-v0.1.md | 日常開発・障害時の共通操作手順 |
 | 7 | docs/adr/0001-core-technology-stack.md | Core技術スタックの決定と理由 |
+| 7 | docs/adr/0002-chatgpt-claude-code-local-bridge.md | ChatGPT(Codex)とClaude CodeのローカルMCPブリッジの決定と理由 |
 | 8 | docs/research/technology-research-2026-07-11.md | 公式資料に基づく技術調査 |
 | 9 | docs/ai-routing.md | Intentと担当AI・ツール選択 |
 | 9 | docs/orchestrator.md | Task状態・承認・エラー処理 |
