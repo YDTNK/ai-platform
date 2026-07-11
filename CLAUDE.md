@@ -2,9 +2,15 @@
 
 ## Project
 
-This repository is the source of truth for the design, implementation, and operation of YDTNK's AI Platform.
+This repository is the source of truth for the design and implementation of YDTNK's AI Platform.
 
 The platform connects conversation, planning, local development, GitHub, knowledge, and multiple AI services while keeping human approval for important decisions.
+
+Project progress, daily-log, fragments, and review tasks are managed in:
+
+```text
+YDTNK/engineering-career-hq/projects/ai-platform/
+```
 
 ## Language
 
@@ -25,22 +31,20 @@ Before planning or modifying files, read:
 7. `docs/ai-routing.md`
 8. `docs/orchestrator.md`
 9. `docs/workspace.md`
-10. `docs/reporting-policy.md`
-11. `prompts/claude-code-initialization.md`
+10. `prompts/claude-code-initialization.md`
 
-When continuing prior work, also inspect:
-
-- the most recent relevant `reports/daily/YYYY-MM-DD.md`
-- the current day's `reports/daily/fragments/YYYY-MM-DD/`
-- the relevant Issue, Pull Request, commit, and design documents
-
-When cross-repository context is required and access is available, also read the global entrypoint:
+When continuing prior work and cross-repository access is available, also read:
 
 - `YDTNK/00-ai-start-here/AI_START_HERE.md`
 - `YDTNK/00-ai-start-here/README.md`
 - `YDTNK/00-ai-start-here/AI_OPERATING_RULES.md`
+- `YDTNK/engineering-career-hq/projects/ai-platform/START_HERE_FOR_AI.md`
+- `YDTNK/engineering-career-hq/projects/ai-platform/project-context.md`
+- `YDTNK/engineering-career-hq/projects/ai-platform/progress.md`
+- the latest relevant daily-log, fragment, and review task
+- the relevant Issue, Pull Request, commit, and design documents
 
-Do not duplicate the full global operating rules in this repository. This file contains only project-specific instructions.
+Do not duplicate the full global operating rules or project-management records in this repository.
 
 ## Role
 
@@ -54,8 +58,8 @@ Primary responsibilities:
 - run available tests, lint, formatting, and build commands
 - debug errors
 - prepare Git diffs, commits, pushes, and pull requests when approved
-- record significant work in fragments and final daily reports
 - report commands, changed files, verification results, risks, and next actions
+- provide the information needed to update the management-side daily-log and progress records
 
 ## Plan before implementation
 
@@ -97,17 +101,14 @@ Explicit approval is required before:
 - Never commit API keys, tokens, passwords, private keys, `.env`, or personal data
 - Create a Pull Request for review before merging
 
-## Reporting rules
+## Record and synchronization rules
 
-Follow `docs/reporting-policy.md`.
-
-- Use `reports/daily/fragments/YYYY-MM-DD/NN-topic.md` for significant work units, major errors, decisions, or cross-repository changes
-- Do not create a fragment for every command or message
-- Use `reports/daily/YYYY-MM-DD.md` as the final daily report
-- Keep detailed specifications in `docs/`, implementation facts in code / Issue / PR / Commit, and summaries plus references in reports
-- Do not duplicate full AI Platform development logs in `engineering-career-hq`
-- Consider syncing only milestones, career impact, or overall priority changes to `engineering-career-hq`
+- Keep architecture and implementation documentation in this repository
+- Keep implementation facts in code, tests, Issues, Pull Requests, and Commits
+- Keep project status, daily-log, fragments, and review tasks in `YDTNK/engineering-career-hq/projects/ai-platform/`
+- Do not create a parallel `reports/` daily-report structure in this repository during the current foundation phase
 - Never claim tests, pushes, merges, or external actions were completed when they were not verified
+- Preserve information before moving or deleting files
 
 ## Quality rules
 
@@ -130,7 +131,7 @@ Report:
 - security checks
 - unresolved issues
 - commit and branch information
-- fragment and daily report updates
+- management-side progress and daily-log updates required
 - cross-repository sync decision
 - recommended next action
 
@@ -141,7 +142,7 @@ The repository is in Phase 1: Foundation.
 Current priorities:
 
 1. establish source-of-truth documentation
-2. establish a safe ChatGPT → Claude Code → GitHub development loop
-3. define AI routing, orchestration, workspace, approval, logging, and reporting behavior
-4. validate the manual reporting workflow before automating it
+2. establish a safe ChatGPT -> Claude Code -> GitHub development loop
+3. define AI routing, orchestration, workspace, approval, and logging behavior
+4. validate the manual cross-repository workflow before automating it
 5. avoid implementing a full autonomous orchestrator before the manual workflow is validated
