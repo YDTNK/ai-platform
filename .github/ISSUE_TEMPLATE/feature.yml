@@ -1,0 +1,117 @@
+name: 開発タスク
+description: AI Platformの機能、文書、運用改善を追跡する
+title: ""
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        タイトルは英語、本文は日本語で記述してください。
+        要件・完了条件・対象外・検証方法を明確にします。
+
+  - type: input
+    id: task_id
+    attributes:
+      label: Task ID
+      description: RoadmapまたはExecution Plan上の識別子
+      placeholder: FND-001
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+      description: このIssueで達成すること
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景
+      description: 必要になった理由と現在の問題
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: 要件
+      description: 対応するFR・NFR・仕様・制約を記載する
+      placeholder: |
+        - FR-001:
+        - NFR-001:
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: 対象範囲
+      description: 変更するファイル、機能、運用
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: 対象外
+      description: このIssueでは実施しないこと
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Task
+      description: 実行可能なチェックリスト
+      value: |
+        - [ ] 事前調査
+        - [ ] 実装計画
+        - [ ] 人間承認
+        - [ ] 実装
+        - [ ] 検証
+        - [ ] Pull Request
+        - [ ] 管理側同期要否確認
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 完了条件
+      description: 客観的に確認できる受入基準
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: 検証方法
+      description: テスト、Lint、Build、差分、手動確認
+    validations:
+      required: true
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk level
+      options:
+        - low
+        - medium
+        - high
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 事前確認
+      options:
+        - label: Source of Truthを確認した
+          required: true
+        - label: 秘密情報をIssue本文へ記載していない
+          required: true
+        - label: 承認が必要な操作を明記した
+          required: true
