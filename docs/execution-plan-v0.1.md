@@ -2,379 +2,237 @@
 
 ## 1. 目的
 
-本ドキュメントは、各フェーズを実行可能なToDoへ分解し、担当、入力、作業内容、確認方法、完了条件を定義する。
+本書はRoadmapのPhaseを、担当・入力・出力・依存関係・検証方法・完了条件を持つ実行可能なTaskへ分解する。
 
-## 2. 共通タスク形式
+現在地の正本はengineering-career-hq/projects/ai-platform/progress.mdとし、本書は実行順序とTask定義を扱う。
 
-各タスクは以下の形式で管理する。
+## 2. Task階層
+
+~~~text
+Epic
+└── Milestone
+    └── Issue
+        └── Task checklist
+~~~
+
+- Epic: Phase全体の目的と成功条件
+- Milestone: GitHub上のPhase進捗集約
+- Issue: 原則1つのPull Requestで完了できる単位
+- Task: Issue本文内の実行チェックリスト
+
+## 3. 共通Task項目
 
 - Task ID
+- 対応Requirement
 - 目的
 - 入力
 - 担当
-- 実施内容
-- 実行コマンドまたはAI向けプロンプト
-- 期待結果
-- 確認方法
-- 完了条件
-- リスク
-- 次のアクション
-
-## 3. Phase 1: Foundation
-
-### FND-001 リポジトリ状態確認
-
-**目的**
-
-現在のリポジトリ構成、ブランチ、変更状態を確認する。
-
-**担当**
-
-Claude Code
-
-**コマンド**
-
-```bash
-git status
-git branch --show-current
-find . -maxdepth 3 -type f | sort
-```
-
-**期待結果**
-
-- 現在のブランチが確認できる
-- 未コミット変更の有無が確認できる
-- 主要ファイル一覧が取得できる
-
-**完了条件**
-
-調査結果が作業ログへ記録されている。
-
----
-
-### FND-002 基本文書確認
-
-**目的**
-
-Architecture、Development Rules、Roadmapを読み、矛盾や不足を確認する。
-
-**入力**
-
-- `docs/architecture-v0.1.md`
-- `docs/development-rules.md`
-- `docs/roadmap-v0.1.md`
-
-**Claude Code向けプロンプト**
-
-```text
-上記3ファイルを読み、以下を報告してください。
-1. プロジェクトの目的
-2. v0.1の対象範囲
-3. 実装前に守るルール
-4. 矛盾または不足
-5. 次に作成すべきファイル
-この段階ではファイルを変更しないでください。
-```
-
-**完了条件**
-
-Claude Codeがプロジェクトの目的と制約を正しく説明できる。
-
----
-
-### FND-003 `.gitignore` 確認・作成
-
-**目的**
-
-秘密情報、依存関係、生成物、一時ファイルの誤コミットを防ぐ。
-
-**コマンド**
-
-```bash
-test -f .gitignore && cat .gitignore || touch .gitignore
-```
-
-**最低限の候補**
-
-```gitignore
-.env
-.env.*
-!.env.example
-.DS_Store
-node_modules/
-.venv/
-__pycache__/
-*.pyc
-dist/
-build/
-coverage/
-*.log
-```
-
-**確認コマンド**
-
-```bash
-git status --short
-```
-
-**完了条件**
-
-秘密情報と主要な生成物がGit管理対象外になっている。
-
----
-
-### FND-004 Claude Code初期化プロンプト作成
-
-**目的**
-
-Claude Codeが毎回同じルールで調査、計画、承認、実装、報告を行えるようにする。
-
-**成果物**
-
-`prompts/claude-code-initialization.md`
-
-**完了条件**
-
-プロンプトに以下が含まれる。
-
-- 必読ファイル
-- 調査優先
-- 承認前の変更禁止
-- セキュリティ制約
-- テストと報告形式
-- Git運用
-
----
-
-### FND-005 Issueテンプレート作成
-
-**目的**
-
-開発タスクを一貫した形式で登録する。
-
-**成果物**
-
-`.github/ISSUE_TEMPLATE/feature.yml`
-
-**含める項目**
-
-- 目的
-- 背景
-- 要件
-- 完了条件
+- 依存関係
+- 対象範囲
 - 対象外
-- リスク
-- テスト方法
+- 実施内容
+- 出力
+- 検証方法
+- 完了条件
+- Risk level
+- 承認要否
+- 管理側同期要否
 
-**完了条件**
+## 4. Phase 1: Foundation
 
-GitHubで新規Issue作成時にテンプレートを選択できる。
+### FND-000 GitHub共通言語ポリシー
 
----
+Status: COMPLETED
 
-### FND-006 Pull Requestテンプレート作成
+- 共通ポリシー正本を00-ai-start-hereへ作成
+- AI Platform固有ルールをCLAUDE.mdとdevelopment-rulesへ反映
+- PRと管理側同期を完了
 
-**成果物**
+### FND-001 Foundation文書・構成監査
 
-`.github/pull_request_template.md`
+Status: IN_PROGRESS
 
-**含める項目**
+対応要件: FR-001〜FR-007、NFR-001〜NFR-006
 
-- 変更目的
-- 変更内容
-- 関連Issue
-- 実行したテスト
-- リスク
-- レビュー観点
-- チェックリスト
+出力:
 
-**完了条件**
+- requirements-v0.1
+- 最適化されたREADME
+- 整合したArchitecture、Roadmap、Execution Plan、Runbook
+- gitignore
+- Issue・PRテンプレート
+- Claude Code必読順の更新
 
-新規PRにテンプレートが自動表示される。
+完了条件:
 
----
+- 文書の優先順位が明記される
+- 最上位要件から完成まで追跡できる
+- 古い次タスク・完了状態が修正される
+- GitHub安全基盤とテンプレートが存在する
+- Pull Requestでレビューされmainへ反映される
 
-### FND-007 最初のIssue作成
+### FND-002 Phase管理構造登録
 
-**タイトル案**
+Status: NOT_STARTED
 
-```text
-feat: establish local development loop
-```
+依存: FND-001
 
-**目的**
+実施内容:
 
-Claude Codeによる調査、計画、承認、実装、テスト、PR作成の最小ループを確立する。
+1. Phase 1 EpicをIssueとして作成
+2. Phase 1 Milestoneを作成
+3. Foundation IssueをMilestoneへ関連付け
+4. 各IssueにTask checklistと完了条件を設定
+5. 既存Issue #1をPhase 2統合検証Issueとして位置付ける
 
-**完了条件**
+完了条件:
 
-- Issueが作成される
-- 完了条件が明記される
-- 対象外が明記される
+- Epic → Milestone → Issue → TaskをGitHubで追跡できる
+- Issue本文は日本語、タイトルは英語になっている
+- 重複Issueを作成していない
 
-## 4. Phase 2: Local Development Loop
+### FND-003 Claude Code初回調査
 
-### LDL-001 ローカルへClone
+Status: NOT_STARTED
 
-```bash
-cd <任意の作業ディレクトリ>
-git clone https://github.com/YDTNK/ai-platform.git
-cd ai-platform
-```
+依存: FND-001
 
-**確認**
+実施内容:
 
-```bash
-git remote -v
+1. ローカルcloneをmainへ更新
+2. Claude CodeをRepository直下で起動
+3. 必読文書を読み込ませる
+4. ファイル変更なしで目的、要件、制約、矛盾、計画を報告させる
+5. 承認前に変更がないことを確認
+
+完了条件:
+
+- Claude CodeがSource of Truth、要件、Phase、承認条件を説明できる
+- git statusに意図しない変更がない
+- 調査結果が管理側fragmentへ保存される
+
+### FND-004 Phase 1完了監査
+
+Status: NOT_STARTED
+
+依存: FND-002、FND-003
+
+確認項目:
+
+- 要件・設計・Roadmap・Execution Plan・Runbook整合
+- gitignore・Issueテンプレート・PRテンプレート存在
+- 秘密情報不存在
+- 最初のIssue存在
+- Claude Code初回調査成功
+- 管理側Source of Truth同期
+
+完了条件:
+
+- Phase 1をCOMPLETEDまたはBLOCKEDとして客観的に判定できる
+- Roadmapと管理側progressへ結果が反映される
+
+## 5. Phase 2: Local Development Loop
+
+### LDL-001 ローカル同期
+
+~~~bash
+git switch main
+git pull --ff-only origin main
 git status
-```
+~~~
 
----
+### LDL-002 Issue #1事前調査
 
-### LDL-002 Feature Branch作成
+- Issue #1と関連設計を読む
+- 変更なしで計画、対象、リスク、検証方法を提示する
+- 人間の承認を得る
 
-```bash
+### LDL-003 Feature Branch
+
+~~~bash
 git switch -c feature/local-development-loop
-```
+~~~
 
-**確認**
+実際のIssue内容に合わせて英語kebab-caseのBranch名へ変更できる。
 
-```bash
-git branch --show-current
-```
+### LDL-004 実装・検証
 
----
+- 承認された最小変更だけを実装
+- 実在するTest、Lint、Format、Buildだけを実行
+- git status、git diff --stat、git diffを確認
+- 秘密情報が含まれないことを確認
 
-### LDL-003 Claude Code起動
+### LDL-005 Commit・Push・Pull Request
 
-```bash
-claude
-```
+~~~bash
+git add <approved-files>
+git diff --cached --stat
+git diff --cached
+git commit -m "<type>: <summary>"
+git push -u origin HEAD
+~~~
 
-**初回指示**
+PRにはIssue、Requirement、変更内容、検証結果、Risk、未解決事項、管理側同期要否を記録する。
 
-```text
-prompts/claude-code-initialization.md を読み、その指示に従ってください。
-まずリポジトリを調査し、変更は行わず、調査結果と実装計画だけを提示してください。
-```
+### LDL-006 Review・Merge・同期
 
----
+1. ChatGPTまたは人間が差分をレビュー
+2. 必要な修正を実施
+3. mainへマージ
+4. fragment、daily-log、progress、review-taskを同期
+5. current-status更新要否を判断
+6. Issue #1を完了条件に基づきClose
 
-### LDL-004 計画承認
+## 6. Phase 3以降の共通実行順序
 
-ユーザーは以下を確認する。
+1. Requirements更新
+2. Architecture・関連仕様更新
+3. Roadmap・Execution Plan更新
+4. ADRまたはDecision記録
+5. Issue作成
+6. Claude Code事前調査
+7. 実装計画
+8. 人間承認
+9. Branch作成
+10. 実装
+11. Test・Security確認
+12. Pull Request
+13. Review
+14. Merge
+15. 管理側同期
+16. Requirementと完了条件の受入確認
 
-- 変更対象ファイル
-- 目的との整合性
-- 影響範囲
-- リスク
-- テスト方法
-- 不要な変更が含まれていないこと
+## 7. Phase 1残タスク
 
-承認後のみ実装へ進む。
-
----
-
-### LDL-005 実装・テスト
-
-プロジェクトの技術スタック確定後、以下を実行する。
-
-```bash
-# 例: Node.js
-npm install
-npm run lint
-npm test
-npm run build
-
-# 例: Python
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-pytest
-```
-
-**注意**
-
-実際に存在するコマンドのみ実行する。存在しないスクリプトを推測して実行しない。
-
----
-
-### LDL-006 差分確認
-
-```bash
-git status --short
-git diff --stat
-git diff
-```
-
-**完了条件**
-
-変更内容をユーザーがレビューできる。
-
----
-
-### LDL-007 CommitとPush
-
-```bash
-git add <対象ファイル>
-git commit -m "feat: establish local development loop"
-git push -u origin feature/local-development-loop
-```
-
----
-
-### LDL-008 Pull Request作成
-
-GitHub上でPRを作成し、以下を記載する。
-
-- 目的
-- 変更内容
-- テスト結果
-- リスク
-- 未解決事項
-- 関連Issue
-
-## 5. Phase 3以降の実行方針
-
-Phase 3以降は、各機能を以下の順序で進める。
-
-1. 要件定義
-2. Architecture更新
-3. ADRまたはDecision Log作成
-4. Issue作成
-5. Claude Codeによる調査
-6. 実装計画
-7. 人間の承認
-8. Feature Branch作成
-9. 実装
-10. テスト
-11. セキュリティ確認
-12. PR作成
-13. レビュー
-14. マージ
-15. 作業ログ更新
-
-## 6. Phase 1の残タスク
-
-- [x] Architecture v0.1
+- [x] README
+- [x] Architecture
 - [x] Development Rules
-- [x] Roadmap v0.1
-- [x] Execution Plan v0.1
-- [ ] Runbook v0.1
-- [ ] Claude Code初期化プロンプト
-- [ ] `.gitignore` 確認
+- [x] Roadmap
+- [x] Execution Plan
+- [x] Runbook
+- [x] AI Routing
+- [x] Orchestrator
+- [x] Workspace
+- [x] Claude Code初期化プロンプト
+- [x] 最初のIssue
+- [x] GitHub共通言語ポリシー
+- [ ] Requirements
+- [ ] gitignore
 - [ ] Issueテンプレート
 - [ ] Pull Requestテンプレート
-- [ ] 最初のIssue
-- [ ] Claude Codeによる調査
+- [ ] 文書間整合レビューとmain反映
+- [ ] Epic・Milestone・Issue・Task登録
+- [ ] Claude Code初回調査
+- [ ] Phase 1完了監査
 
-## 7. 完了定義
+本Pull Requestで追加・反映する項目は、mainへのマージ後にCOMPLETEDへ更新する。実行中のBranch上だけで完了扱いにしない。
 
-Phase 1は以下をすべて満たした場合に完了とする。
+## 8. Phase 1完了定義
 
-- 必要な設計書とルールがGitHubに保存されている
-- Claude Codeの初期化手順が再現可能である
+- 最上位要件からIssue・実装まで追跡できる
+- 主要文書の役割・優先順位・現在地が一致する
+- Claude Codeの初期化と初回調査が再現可能
 - 秘密情報の誤コミット対策がある
-- IssueとPRの標準形式がある
-- 最初の開発Issueが登録されている
-- Claude Codeが変更なしのリポジトリ調査を正常に完了している
+- Issue・PR標準形式がある
+- Phase管理構造と最初のIssueが登録されている
+- 管理側Source of Truthへ結果が同期されている
