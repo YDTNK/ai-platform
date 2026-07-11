@@ -2,177 +2,217 @@
 
 ## 1. 目的
 
-本ドキュメントは、AI Platformを段階的に完成させるための開発順序、各フェーズの目的、成果物、完了条件を定義する。
+本書は、AI Platformを完成させるまでのPhase、各Phaseの目的、成果物、完了条件、依存関係を定義する。
+
+最上位要件はdocs/requirements-v0.1.mdとし、各Phaseは対応する機能要件・非機能要件を満たす。
 
 ## 2. 全体方針
 
-- 小さな単位で実装し、各フェーズで動作確認可能な成果物を残す
-- 設計、実装、テスト、記録、レビューを一つの開発ループとして扱う
-- 危険な操作は自動化せず、人間の承認を必須とする
-- 特定のAIサービスへ過度に依存しない構成を維持する
+- Requirements → Architecture → Roadmap → Execution Plan → Issue → Implementationの順序を維持する
+- 各Phaseで検証可能な成果物を残す
+- 人間承認を維持したまま、手動から段階的に自動化する
+- 特定AIベンダーへ過度に依存しない
+- Phase完了前に完了条件と管理側Source of Truthを同期する
 
 ## 3. Phase 1: Foundation
 
 ### 目的
 
-Claude Codeがリポジトリ内の設計書とルールを読み、安全に開発を開始できる土台を整える。
+Claude Codeと人間が要件・設計・ルールを読み、安全に開発を開始できる土台を完成させる。
+
+### 対応要件
+
+- FR-001〜FR-007
+- NFR-001〜NFR-006の文書・運用基盤
 
 ### 成果物
 
-- `README.md`
-- `docs/architecture-v0.1.md`
-- `docs/development-rules.md`
-- `docs/roadmap-v0.1.md`
-- `docs/execution-plan-v0.1.md`
-- `docs/runbook-v0.1.md`
-- `prompts/claude-code-initialization.md`
+- README
+- requirements-v0.1
+- architecture-v0.1
+- development-rules
+- roadmap-v0.1
+- execution-plan-v0.1
+- runbook-v0.1
+- ai-routing
+- orchestrator
+- workspace
+- CLAUDE.md
+- Claude Code初期化プロンプト
+- gitignore
 - Issueテンプレート
 - Pull Requestテンプレート
-- `.gitignore`
+- 最初の開発Issue
 
 ### 完了条件
 
-- Claude Codeが主要ドキュメントを読み、プロジェクトの目的、制約、作業手順を説明できる
-- リポジトリ内に秘密情報が存在しない
-- 初回開発タスクがGitHub Issueとして登録されている
+- 主要文書が役割と優先順位を持ち、相互に矛盾していない
+- Claude Codeが目的、対象範囲、承認条件、作業手順を説明できる
+- 秘密情報の誤コミット対策がある
+- Issue・PRの標準入力形式がある
+- Phase 2で使う最初のIssueが登録されている
 
 ## 4. Phase 2: Local Development Loop
 
 ### 目的
 
-ChatGPTによる要件整理、Claude Codeによる実装、GitHubによる履歴管理を一連の流れとして確立する。
+ChatGPTによる要件・設計、Claude Codeによる調査・実装・検証、GitHubによる履歴管理、engineering-career-hqによる管理記録を1つの再現可能な流れとして実証する。
+
+### 対応要件
+
+- FR-001〜FR-007
+- NFR-001〜NFR-004
 
 ### 成果物
 
-- タスク入力フォーマット
-- Claude Code向け実装プロンプト
-- 作業ログテンプレート
-- Decision Logテンプレート
-- テスト結果テンプレート
-- Feature BranchとPull Requestの運用
+- 実行済みのIssue
+- Feature Branch
+- Commit
+- Pull Request
+- Review結果
+- Merge結果
+- fragment、daily-log、progress、review-taskの同期記録
 
 ### 完了条件
 
-- 一つのIssueについて、調査、計画、承認、実装、テスト、PR作成まで実施できる
-- 実行コマンド、変更ファイル、テスト結果が記録される
-- 失敗時に原因と次の対応が報告される
+- 1件のIssueを調査、計画、承認、実装、検証、PR、レビュー、マージ、管理側同期まで完走できる
+- 実行コマンド、変更ファイル、検証結果、失敗、未解決事項が追跡できる
+- 承認前に変更が行われていない
+- 失敗時に原因と次の対応を報告できる
 
 ## 5. Phase 3: AI Platform Core
 
 ### 目的
 
-タスク、実行状態、作業ログ、決定事項を管理する最小限のアプリケーションを構築する。
+Task、状態、承認、実行履歴、Decision、Error、Next Actionを管理する最小アプリケーションを構築する。
+
+### 対応要件
+
+- FR-002、FR-004、FR-006〜FR-009
+- NFR-001〜NFR-006
 
 ### 主な機能
 
-- タスク作成と状態管理
-- 実行履歴の保存
-- Decision Logの保存
-- エラーログの保存
-- 次のアクションの抽出
-- ローカルファイルの安全な参照
+- Task作成と状態遷移
+- Task・Execution・Approval・Decision・Errorの永続化
+- 再起動後の状態復元
+- ローカルファイルの許可範囲確認
+- 構造化ログ
 
 ### 完了条件
 
-- タスクが `pending`, `planning`, `approval_required`, `running`, `failed`, `completed` の状態で管理できる
-- 各タスクに実行履歴が紐づく
-- 再起動後も履歴が保持される
+- DRAFTからCOMPLETEDまたは例外状態まで遷移できる
+- 各Taskに承認・実行・エラー履歴が関連付く
+- 再起動後に状態を復元できる
+- Unit Testと基本的なセキュリティ検証が成功する
 
 ## 6. Phase 4: Orchestration
 
 ### 目的
 
-複数のAI、ローカルツール、GitHubを役割ごとに連携させる。
+複数AI、ローカルツール、GitHubを能力・Intent・Riskに基づいて連携させる。
+
+### 対応要件
+
+- FR-002〜FR-010
 
 ### 主な機能
 
-- タスク分解
-- 担当AIまたはツールの選択
-- 承認フロー
-- 再試行
-- タイムアウト
-- エラー時の停止と報告
-- GitHub Issue、Branch、Pull Requestとの連携
+- Intent分類とTask分解
+- Agent・Tool選択
+- 承認ゲート
+- Retry、Timeout、停止
+- GitHub Issue・PR同期
+- Provider Adapter
 
 ### 完了条件
 
-- 一つの要求を複数タスクへ分解できる
-- 危険操作の前に承認待ちで停止できる
-- エラー発生時に無限再試行せず、安全に停止できる
+- 1つの要求を依存関係付きTaskへ分解できる
+- 危険操作の前に停止できる
+- Retry上限後に安全にFAILEDまたはBLOCKEDへ遷移できる
+- Providerを差し替えてもCore状態モデルを維持できる
 
 ## 7. Phase 5: Voice and Meeting Notes
 
 ### 目的
 
-会話を続けながら、文字起こし、要約、決定事項、ToDoをリアルタイムまたは準リアルタイムで記録する。
+音声会話から要求、議事録、Decision、Taskを生成し、Workspaceへ保存する。
 
-### 主な機能
+### 対応要件
 
-- 音声入力
-- 音声応答
-- リアルタイム文字起こし
-- 会話要約
-- 決定事項の抽出
-- ToDoの抽出
-- 会話ログの保存
+- FR-011
 
 ### 完了条件
 
-- 音声会話中にテキストログが更新される
-- 会話終了後に議事録、決定事項、ToDoが生成される
-- 保存先をプロジェクト単位で選択できる
+- 音声からText Logを生成できる
+- 会話終了後に要約、Decision、Taskを抽出できる
+- 保存先Workspaceを選択できる
+- 保存前に内容と送信先を確認できる
 
 ## 8. Phase 6: Knowledge Platform
 
 ### 目的
 
-仕事、SRE学習、CKA学習、音楽制作、副業開発などの情報を横断的に検索・活用できる状態を作る。
+会話、設計、ログ、コードをProject境界と権限を維持して検索・再利用する。
 
-### 主な機能
+### 対応要件
 
-- ドキュメント検索
-- 過去会話検索
-- ローカルファイル検索
-- セマンティック検索
-- プロジェクト別コンテキスト管理
-- 権限付きナレッジアクセス
+- FR-007、FR-012
 
 ### 完了条件
 
-- 過去の会話、設計書、ログ、コードを自然言語で検索できる
+- 自然言語で横断検索できる
 - 検索結果に出典が表示される
-- プロジェクト間の情報混在を制御できる
+- Workspace間の情報混在を制御できる
+- アクセス権のない情報を結果へ含めない
 
 ## 9. Phase 7: Productization
 
 ### 目的
 
-自分専用ツールから、他のユーザーも安全に利用できる製品へ発展させる。
+個人用基盤から、他ユーザーが安全に利用できるプロダクトへ発展させる。
 
-### 主な機能
+### 対応要件
 
-- 複数ユーザー対応
-- 認証・認可
-- プラン管理
-- 課金
-- 利用状況の計測
-- インストーラーまたはクラウド提供
-- 利用規約とプライバシーポリシー
+- FR-013
+- 製品化に必要な追加要件
 
 ### 完了条件
 
-- 他ユーザーが自分の環境でセットアップできる
-- ユーザーごとのデータが分離される
-- 課金、サポート、障害対応の運用が定義されている
+- 複数ユーザーの認証・認可・データ分離が機能する
+- Setup、Upgrade、Backup、障害対応手順がある
+- 利用規約、Privacy、課金、Supportが定義される
+- 他ユーザー環境で受入テストが成功する
 
-## 10. 現在地
+## 10. Phase依存関係
 
-現在は Phase 1: Foundation を実施中である。
+~~~text
+Phase 1 Foundation
+  ↓
+Phase 2 Local Development Loop
+  ↓
+Phase 3 AI Platform Core
+  ↓
+Phase 4 Orchestration
+  ├─ Phase 5 Voice and Meeting Notes
+  └─ Phase 6 Knowledge Platform
+       ↓
+Phase 7 Productization
+~~~
 
-次の優先作業は以下とする。
+Phase 5とPhase 6はPhase 4完了後に独立して進められる。Phase 7はCore、Orchestration、VoiceまたはKnowledgeの必要範囲が安定した後に開始する。
 
-1. `docs/execution-plan-v0.1.md` の作成
-2. `docs/runbook-v0.1.md` の作成
-3. `prompts/claude-code-initialization.md` の作成
-4. 最初のGitHub Issueの作成
-5. Claude Codeによるリポジトリ調査
+## 11. 現在地
+
+~~~text
+Current phase: Phase 1 Foundation
+Status: IN_PROGRESS
+~~~
+
+次の優先作業:
+
+1. Foundation文書・安全基盤・GitHubテンプレートをmainへ反映する
+2. Phase 1のEpic、Milestone、Issue、Task構造を登録する
+3. Claude Codeで変更なしの初回調査を実施する
+4. Phase 1完了監査を行う
+5. Phase 2でIssue #1の開発ループを完走する
