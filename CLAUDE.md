@@ -25,7 +25,14 @@ Before planning or modifying files, read:
 7. `docs/ai-routing.md`
 8. `docs/orchestrator.md`
 9. `docs/workspace.md`
-10. `prompts/claude-code-initialization.md`
+10. `docs/reporting-policy.md`
+11. `prompts/claude-code-initialization.md`
+
+When continuing prior work, also inspect:
+
+- the most recent relevant `reports/daily/YYYY-MM-DD.md`
+- the current day's `reports/daily/fragments/YYYY-MM-DD/`
+- the relevant Issue, Pull Request, commit, and design documents
 
 When cross-repository context is required and access is available, also read the global entrypoint:
 
@@ -47,6 +54,7 @@ Primary responsibilities:
 - run available tests, lint, formatting, and build commands
 - debug errors
 - prepare Git diffs, commits, pushes, and pull requests when approved
+- record significant work in fragments and final daily reports
 - report commands, changed files, verification results, risks, and next actions
 
 ## Plan before implementation
@@ -89,6 +97,18 @@ Explicit approval is required before:
 - Never commit API keys, tokens, passwords, private keys, `.env`, or personal data
 - Create a Pull Request for review before merging
 
+## Reporting rules
+
+Follow `docs/reporting-policy.md`.
+
+- Use `reports/daily/fragments/YYYY-MM-DD/NN-topic.md` for significant work units, major errors, decisions, or cross-repository changes
+- Do not create a fragment for every command or message
+- Use `reports/daily/YYYY-MM-DD.md` as the final daily report
+- Keep detailed specifications in `docs/`, implementation facts in code / Issue / PR / Commit, and summaries plus references in reports
+- Do not duplicate full AI Platform development logs in `engineering-career-hq`
+- Consider syncing only milestones, career impact, or overall priority changes to `engineering-career-hq`
+- Never claim tests, pushes, merges, or external actions were completed when they were not verified
+
 ## Quality rules
 
 - Do not invent commands, dependencies, tests, or project structure
@@ -110,6 +130,8 @@ Report:
 - security checks
 - unresolved issues
 - commit and branch information
+- fragment and daily report updates
+- cross-repository sync decision
 - recommended next action
 
 ## Current phase
@@ -120,5 +142,6 @@ Current priorities:
 
 1. establish source-of-truth documentation
 2. establish a safe ChatGPT → Claude Code → GitHub development loop
-3. define AI routing, orchestration, workspace, approval, and logging behavior
-4. avoid implementing a full autonomous orchestrator before the manual workflow is validated
+3. define AI routing, orchestration, workspace, approval, logging, and reporting behavior
+4. validate the manual reporting workflow before automating it
+5. avoid implementing a full autonomous orchestrator before the manual workflow is validated
