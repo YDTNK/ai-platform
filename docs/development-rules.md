@@ -248,7 +248,25 @@ AIは人間の判断を置き換えるものではなく、思考整理、実装
 
 AIによる自動化の範囲を広げる場合でも、重要な判断、危険な操作、外部公開、本番反映については、人間が最終承認を行う。
 
-## 14. バージョン
+## 14. 言語・命名規則
+
+GitHub全体の共通言語・命名ポリシーは、以下を正本とする。
+
+~~~text
+YDTNK/00-ai-start-here/docs/language-policy.md
+~~~
+
+AI Platformでは、以下をプロジェクト固有の適用ルールとする。
+
+- README、Architecture、Roadmap、Runbook、運用文書、Issue本文、Pull Request本文は日本語で記述する
+- Branch名、Commit message、Issue・Pull Requestタイトル、ファイル名、コード識別子、設定キー、Intent、Statusなどの固定値は英語で記述する
+- 構造化データではキーと固定値を英語、人間向けの説明と判断理由を日本語にする
+- 製品名、CLIコマンド、API名、規格名は原文を維持する
+- 既存英語文書は実質的な更新機会に整え、言語統一だけを目的とする大規模変更や情報削除を行わない
+- 共通ポリシー全文はこのRepositoryへ複製しない
+- 例外が必要な場合は、理由をIssueまたはPull Requestに記録する
+
+## 15. バージョン
 
 - Version: v0.1
 - Status: Draft

@@ -14,9 +14,19 @@ YDTNK/engineering-career-hq/projects/ai-platform/
 
 ## Language
 
-- User-facing documentation: Japanese
-- Commit messages: English
-- Code identifiers and technical names: English unless an established convention requires otherwise
+GitHub全体の言語・命名ポリシーは、以下を正本とする。
+
+~~~text
+YDTNK/00-ai-start-here/docs/language-policy.md
+~~~
+
+本Repositoryでは次を適用する。
+
+- README、設計書、Runbook、Issue本文、Pull Request本文など、人間が読み返す文章は日本語
+- Branch名、Commit message、Issue・Pull Requestタイトル、ファイル名、コード識別子、設定キー、固定状態値は英語
+- 技術名称、コマンド、API、規格の固有表記は原文を維持
+- 既存英語文書は実質的な更新機会に日本語へ整え、一括翻訳や情報消失は行わない
+- 共通ポリシー全文をこのRepositoryへ複製しない
 
 ## Required reading order
 
