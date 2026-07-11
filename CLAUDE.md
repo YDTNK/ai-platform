@@ -37,12 +37,15 @@ Before planning or modifying files, read:
 3. `docs/architecture-v0.1.md`
 4. `docs/roadmap-v0.1.md`
 5. `docs/execution-plan-v0.1.md`
-6. `docs/runbook-v0.1.md`
-7. `docs/ai-routing.md`
-8. `docs/orchestrator.md`
-9. `docs/workspace.md`
-10. `docs/development-rules.md`
-11. `prompts/claude-code-initialization.md`
+6. `docs/implementation-guide-v0.1.md`
+7. `docs/runbook-v0.1.md`
+8. `docs/adr/0001-core-technology-stack.md`
+9. `docs/research/technology-research-2026-07-11.md`
+10. `docs/ai-routing.md`
+11. `docs/orchestrator.md`
+12. `docs/workspace.md`
+13. `docs/development-rules.md`
+14. `prompts/claude-code-initialization.md`
 
 When continuing prior work and cross-repository access is available, also read:
 
@@ -127,7 +130,9 @@ Explicit approval is required before:
 - Discover existing tooling before running commands
 - Preserve existing information when reorganizing documentation
 - Update requirements and design documents before implementation when requirements or architecture change
-- Keep requirements, architecture, roadmap, execution plan, Issue, and implementation traceable
+- Keep requirements, architecture, roadmap, execution plan, implementation guide, Issue, and implementation traceable
+- Follow the implementation guide in order and do not skip a Phase completion gate
+- Re-check official documentation before installing provider SDKs or adopting draft protocols
 - Do not mark work complete while tests or required checks are failing
 - State clearly when a check could not be performed
 

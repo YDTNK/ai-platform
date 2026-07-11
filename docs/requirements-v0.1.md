@@ -198,7 +198,35 @@ YDTNK/ai-platform
 - 既存GitHub責務と矛盾しない
 - 情報消失や重複するSource of Truthがない
 
-## 13. 変更管理
+## 13. 実装技術制約
+
+採用技術の正本:
+
+~~~text
+docs/adr/0001-core-technology-stack.md
+~~~
+
+実装手順の正本:
+
+~~~text
+docs/implementation-guide-v0.1.md
+~~~
+
+公式調査記録:
+
+~~~text
+docs/research/technology-research-2026-07-11.md
+~~~
+
+- CoreはPython 3.12を使用する
+- Dependencyはpyproject.tomlとuv.lockで再現する
+- Domain層をProvider SDKから独立させる
+- State・Approval・Retry上限をLLMへ委任しない
+- Provider SDKとMCPはAdapter境界で接続する
+- SQLiteから開始し、Alembic Migrationを維持してPostgreSQLへ移行可能にする
+- Test・Static Check・Trace・CIをPhase 3から必須化する
+
+## 14. 変更管理
 
 要件変更は次の順序で行う。
 

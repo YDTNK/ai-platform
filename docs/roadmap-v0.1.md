@@ -2,7 +2,7 @@
 
 ## 1. 目的
 
-本書は、AI Platformを完成させるまでのPhase、各Phaseの目的、成果物、完了条件、依存関係を定義する。
+本書は、AI Platformを完成させるまでのPhase、各Phaseの目的、成果物、完了条件、依存関係を定義する。コマンド・作成ファイル・テスト・完了Gateはdocs/implementation-guide-v0.1.mdを正本とする。
 
 最上位要件はdocs/requirements-v0.1.mdとし、各Phaseは対応する機能要件・非機能要件を満たす。
 
@@ -216,3 +216,13 @@ Status: IN_PROGRESS
 3. Claude Codeで変更なしの初回調査を実施する
 4. Phase 1完了監査を行う
 5. Phase 2でIssue #1の開発ループを完走する
+
+
+## 12. Phase実行規則
+
+各Phaseはdocs/implementation-guide-v0.1.mdの順序で実行する。
+
+- 前PhaseのCompletion Gateを通過するまで次Phaseへ進まない
+- Provider SDK導入直前に公式Install手順とStable Versionを再確認する
+- Command失敗時は推測で継続せず、ErrorとEnvironmentを記録する
+- Completion Gateの証跡をIssue、PR、Test結果、管理側progressへ残す
