@@ -15,11 +15,14 @@
 3. `docs/architecture-v0.1.md`
 4. `docs/roadmap-v0.1.md`
 5. `docs/execution-plan-v0.1.md`
-6. `docs/runbook-v0.1.md`
-7. `docs/ai-routing.md`
-8. `docs/orchestrator.md`
-9. `docs/workspace.md`
-10. `docs/development-rules.md`
+6. `docs/implementation-guide-v0.1.md`
+7. `docs/runbook-v0.1.md`
+8. `docs/adr/0001-core-technology-stack.md`
+9. `docs/research/technology-research-2026-07-11.md`
+10. `docs/ai-routing.md`
+11. `docs/orchestrator.md`
+12. `docs/workspace.md`
+13. `docs/development-rules.md`
 
 ## 作業原則
 
@@ -40,8 +43,9 @@
 3. 主要ドキュメントを読む
 4. プロジェクトの目的、FR・NFR、v0.1の範囲と対象外を要約する
 5. Requirements → Architecture → Roadmap → Execution Plan → Issueの追跡性と矛盾を確認する
-6. 次に実施すべきタスクを小さな単位へ分割する
-7. リスクと承認が必要な操作を整理する
+6. Current PhaseのImplementation GuideとCompletion Gateを確認する
+7. 次に実施すべきタスクを小さな単位へ分割する
+8. リスクと承認が必要な操作を整理する
 
 この段階では、以下を行わないでください。
 
