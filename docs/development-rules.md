@@ -187,11 +187,14 @@ Claude Codeには、原則として対象プロジェクト単位でアクセス
 
 設計変更を伴う場合は、以下の順序で更新する。
 
-1. Architecture
-2. Development Rulesまたは関連仕様書
-3. Implementation
-4. Test
-5. Operation Log
+1. Requirements
+2. Architecture
+3. Roadmap・Execution Plan・関連仕様
+4. Issue
+5. Implementation
+6. Test
+7. Pull Request・Review
+8. Operation Log
 
 実装だけを先行させない。
 

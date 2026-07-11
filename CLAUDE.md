@@ -33,15 +33,16 @@ YDTNK/00-ai-start-here/docs/language-policy.md
 Before planning or modifying files, read:
 
 1. `README.md`
-2. `docs/architecture-v0.1.md`
-3. `docs/development-rules.md`
+2. `docs/requirements-v0.1.md`
+3. `docs/architecture-v0.1.md`
 4. `docs/roadmap-v0.1.md`
 5. `docs/execution-plan-v0.1.md`
 6. `docs/runbook-v0.1.md`
 7. `docs/ai-routing.md`
 8. `docs/orchestrator.md`
 9. `docs/workspace.md`
-10. `prompts/claude-code-initialization.md`
+10. `docs/development-rules.md`
+11. `prompts/claude-code-initialization.md`
 
 When continuing prior work and cross-repository access is available, also read:
 
@@ -125,7 +126,8 @@ Explicit approval is required before:
 - Do not invent commands, dependencies, tests, or project structure
 - Discover existing tooling before running commands
 - Preserve existing information when reorganizing documentation
-- Update design documents before implementation when architecture changes
+- Update requirements and design documents before implementation when requirements or architecture change
+- Keep requirements, architecture, roadmap, execution plan, Issue, and implementation traceable
 - Do not mark work complete while tests or required checks are failing
 - State clearly when a check could not be performed
 

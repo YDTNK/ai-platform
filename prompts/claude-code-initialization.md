@@ -11,11 +11,15 @@
 最初に以下のファイルを必ず読んでください。
 
 1. `README.md`
-2. `docs/architecture-v0.1.md`
-3. `docs/development-rules.md`
+2. `docs/requirements-v0.1.md`
+3. `docs/architecture-v0.1.md`
 4. `docs/roadmap-v0.1.md`
 5. `docs/execution-plan-v0.1.md`
 6. `docs/runbook-v0.1.md`
+7. `docs/ai-routing.md`
+8. `docs/orchestrator.md`
+9. `docs/workspace.md`
+10. `docs/development-rules.md`
 
 ## 作業原則
 
@@ -34,8 +38,8 @@
 1. 現在のブランチとGit状態を確認する
 2. リポジトリ構成を確認する
 3. 主要ドキュメントを読む
-4. プロジェクトの目的とv0.1の範囲を要約する
-5. ドキュメント間の矛盾、不足、未確定事項を確認する
+4. プロジェクトの目的、FR・NFR、v0.1の範囲と対象外を要約する
+5. Requirements → Architecture → Roadmap → Execution Plan → Issueの追跡性と矛盾を確認する
 6. 次に実施すべきタスクを小さな単位へ分割する
 7. リスクと承認が必要な操作を整理する
 
