@@ -71,12 +71,16 @@ prompts/claude-code-initialization.md を読み、その指示に従ってくだ
 
 最初に以下を実施してください。
 1. README.md を読む
-2. docs/architecture-v0.1.md を読む
-3. docs/development-rules.md を読む
+2. docs/requirements-v0.1.md を読む
+3. docs/architecture-v0.1.md を読む
 4. docs/roadmap-v0.1.md を読む
 5. docs/execution-plan-v0.1.md を読む
 6. docs/runbook-v0.1.md を読む
-7. 現在のリポジトリ構成を調査する
+7. docs/ai-routing.md を読む
+8. docs/orchestrator.md を読む
+9. docs/workspace.md を読む
+10. docs/development-rules.md を読む
+11. 現在のリポジトリ構成を調査する
 
 この段階ではファイル変更、パッケージ導入、Git操作を行わないでください。
 調査結果、矛盾、不足、推奨する次の作業、リスクを報告してください。
@@ -86,8 +90,8 @@ prompts/claude-code-initialization.md を読み、その指示に従ってくだ
 
 以下を確認する。
 
-- プロジェクトの目的を正しく理解している
-- v0.1の対象範囲を説明できている
+- プロジェクトの目的と解決する課題を正しく理解している
+- FR・NFR・v0.1の対象範囲と対象外を説明できている
 - セキュリティルールを理解している
 - 勝手にファイルを変更していない
 - 次の作業が小さな単位に分割されている
@@ -296,3 +300,25 @@ git diff --stat
 - 差分、テスト、秘密情報を確認できる
 - Commit、Push、PR作成まで再現できる
 - エラー時に安全に停止・報告できる
+
+## 11. 文書整合確認
+
+設計または実装を開始する前に、次の順序で矛盾がないことを確認する。
+
+~~~text
+requirements
+→ architecture
+→ roadmap
+→ execution-plan
+→ Issue
+→ implementation
+~~~
+
+矛盾がある場合は上位文書を基準に影響範囲を整理し、承認後に下位文書を更新する。
+
+確認項目:
+
+- IssueがRequirement IDまたはTask IDを参照している
+- 完了条件が客観的に検証できる
+- Roadmap上のPhaseと管理側progressの現在地が一致する
+- 対象外の機能を先行実装していない
