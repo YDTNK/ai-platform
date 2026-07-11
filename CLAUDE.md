@@ -126,7 +126,8 @@ Explicit approval is required before:
 - Do not invent commands, dependencies, tests, or project structure
 - Discover existing tooling before running commands
 - Preserve existing information when reorganizing documentation
-- Update design documents before implementation when architecture changes
+- Update requirements and design documents before implementation when requirements or architecture change
+- Keep requirements, architecture, roadmap, execution plan, Issue, and implementation traceable
 - Do not mark work complete while tests or required checks are failing
 - State clearly when a check could not be performed
 
