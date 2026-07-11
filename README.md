@@ -15,7 +15,7 @@ YDTNK/00-ai-start-here
   └─ GitHub全体のAI入口・Repositoryルーティング・共通AI運用ルールの正本
 
 YDTNK/ai-platform
-  └─ AI連携、オーケストレーション、Workspace、実行基盤の設計・実装の正本
+  └─ AI連携、オーケストレーション、Workspace、実行基盤、プロダクト開発記録の正本
 
 YDTNK/engineering-career-hq
   └─ 学習、キャリア、進捗、ロードマップ、daily-logの正本
@@ -25,6 +25,8 @@ YDTNK/engineering-career-hq
 ```
 
 AI Platformは `00-ai-start-here` を置き換えません。`00-ai-start-here` が「どこを見るか」を決め、AI Platformが「どう分解し、どのAI・ツールで実行し、どう記録するか」を担当します。
+
+AI Platform固有の詳細な開発履歴は `reports/` に保存します。学習・キャリア・全体進捗へ影響する節目だけを、必要に応じて `engineering-career-hq` へ要約・参照として同期します。
 
 ## 目的
 
@@ -67,6 +69,7 @@ AI Platformは `00-ai-start-here` を置き換えません。`00-ai-start-here` 
 | `docs/ai-routing.md` | AI・ツールの振り分けルール |
 | `docs/orchestrator.md` | タスク、状態、承認、エラー処理 |
 | `docs/workspace.md` | 文脈・知識・Repositoryの管理単位 |
+| `docs/reporting-policy.md` | fragment、daily report、Repository間同期の運用 |
 | `CLAUDE.md` | Claude Code向けプロジェクト固有ルール |
 | `prompts/claude-code-initialization.md` | Claude Code初期調査用プロンプト |
 
@@ -78,9 +81,22 @@ AI Platformは `00-ai-start-here` を置き換えません。`00-ai-start-here` 
 ├── README.md
 ├── docs/       設計書・仕様書・議事録
 ├── prompts/    AI向けプロンプト
+├── reports/    AI Platformのdaily report・fragment・テンプレート
 ├── scripts/    開発・運用スクリプト
 └── src/        アプリケーションコード
 ```
+
+## Reporting
+
+```text
+reports/daily/YYYY-MM-DD.md
+= その日のAI Platform開発レポート
+
+reports/daily/fragments/YYYY-MM-DD/NN-topic.md
+= 作業中の主要タスク単位の証跡
+```
+
+詳細は `docs/reporting-policy.md` と `reports/daily/README.md` を参照してください。
 
 ## 現在の開発フロー
 
@@ -93,7 +109,9 @@ Claude Code: 調査・計画・実装・テスト
   ↓
 GitHub: Branch・Commit・Pull Request・履歴
   ↓
+reports/: fragment・daily report・意思決定・次回作業
+  ↓
 ChatGPT / Human: 最終レビューと次タスク
 ```
 
-現在は手動または半自動の連携を検証し、安定した開発ループを確立してから自動オーケストレーションへ進みます。
+現在は手動または半自動の連携を検証し、安定した開発ループと記録運用を確立してから自動オーケストレーションへ進みます。
