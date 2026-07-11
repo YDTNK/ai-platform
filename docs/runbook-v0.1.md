@@ -75,12 +75,15 @@ prompts/claude-code-initialization.md を読み、その指示に従ってくだ
 3. docs/architecture-v0.1.md を読む
 4. docs/roadmap-v0.1.md を読む
 5. docs/execution-plan-v0.1.md を読む
-6. docs/runbook-v0.1.md を読む
-7. docs/ai-routing.md を読む
-8. docs/orchestrator.md を読む
-9. docs/workspace.md を読む
-10. docs/development-rules.md を読む
-11. 現在のリポジトリ構成を調査する
+6. docs/implementation-guide-v0.1.md を読む
+7. docs/runbook-v0.1.md を読む
+8. docs/adr/0001-core-technology-stack.md を読む
+9. docs/research/technology-research-2026-07-11.md を読む
+10. docs/ai-routing.md を読む
+11. docs/orchestrator.md を読む
+12. docs/workspace.md を読む
+13. docs/development-rules.md を読む
+14. 現在のリポジトリ構成を調査する
 
 この段階ではファイル変更、パッケージ導入、Git操作を行わないでください。
 調査結果、矛盾、不足、推奨する次の作業、リスクを報告してください。
@@ -322,3 +325,15 @@ requirements
 - 完了条件が客観的に検証できる
 - Roadmap上のPhaseと管理側progressの現在地が一致する
 - 対象外の機能を先行実装していない
+
+
+## 12. Phase作業開始
+
+1. engineering-career-hqのprogressとreview-taskを確認する
+2. Roadmap上のCurrent Phaseを確認する
+3. implementation-guide-v0.1.mdの該当Phaseを開く
+4. 前PhaseのCompletion Gateを照合する
+5. Issue・Branchを用意する
+6. Claude Codeへ変更なしの計画を依頼する
+7. 人間承認後にCommandを順番に実行する
+8. Phase Completion Gateの証跡を保存する
