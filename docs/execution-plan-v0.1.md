@@ -2,7 +2,7 @@
 
 ## 1. 目的
 
-本書はRoadmapのPhaseを、担当・入力・出力・依存関係・検証方法・完了条件を持つ実行可能なTaskへ分解する。
+本書はdocs/requirements-v0.1.mdとRoadmapで定義されたPhaseを、担当・入力・出力・依存関係・検証方法・完了条件を持つ実行可能なTaskへ分解する。
 
 現在地の正本はengineering-career-hq/projects/ai-platform/progress.mdとし、本書は実行順序とTask定義を扱う。
 
